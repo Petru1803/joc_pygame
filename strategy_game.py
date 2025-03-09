@@ -59,6 +59,36 @@ class Hexagon:
         self.owner = owner
         self.stats = {"Power": random.randint(1, 10), "Defense": random.randint(1, 10)}
 
+    # Factory levels
+        self.factory_levels = {
+            "armor_factory": 0,
+            "barracks": 0,
+            "airplane_factory": 0,
+            "food_factory": 0,
+            "resource_gathering": 0
+        }
+        
+        # Unit counts
+        self.units = {
+            "guards": 0,
+            "motorized_guards": 0,
+            "infantry": 0,
+            "motorized_infantry": 0,
+            "recon": 0,
+            "motorized_recon": 0,
+            "light_armor": 0,
+            "medium_armor": 0,
+            "heavy_armor": 0,
+            "fighter_squadron": 0,
+            "paratroopers": 0
+        }
+        
+        # Stats
+        self.stats = {"Power": random.randint(1, 10), "Defense": random.randint(1, 10)}
+        self.x, self.y = x, y
+        self.owner = owner
+        self.stats = {"Power": random.randint(1, 10), "Defense": random.randint(1, 10)}
+
     def draw(self):
         color = BLUE if self.owner == "player" else RED if self.owner == "ai" else GRAY
         points = self.get_hex_points()
@@ -140,12 +170,11 @@ if len(hexagons) > 2:
     hexagons[1].owner = "player"
 
 # Land hexagons detected from the image
-land_hex_positions = [(x, y) for (x, y) in [
-    (100, 150), (200, 250), (300, 350), (400, 450), (500, 550), (600, 650), (700, 750), (800, 850)
-]]  # Replace with detected hex positions
-for x, y in land_hex_positions:
-    owner = random.choice(["player", "neutral", "ai"])
-    hexagons.append(Hexagon(x, y, owner))
+#land_hex_positions = [(x, y) for (x, y) in [
+    #(100, 150), (200, 250), (300, 350), (400, 450), (500, 550), (600, 650), (700, 750), (800, 850)]]  # Replace with detected hex positions
+#for x, y in land_hex_positions:
+    #owner = random.choice(["player", "neutral", "ai"])
+    #hexagons.append(Hexagon(x, y, owner))
 
 # Main loop
 running = True
