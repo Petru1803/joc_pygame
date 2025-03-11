@@ -5,7 +5,7 @@ import random
 pygame.init()
 
 # Constants
-WIDTH, HEIGHT = 894, 894
+WIDTH, HEIGHT = 1792, 1024
 HEX_SIZE = 25
 BG_COLOR = (30, 30, 30)
 WHITE = (255, 255, 255)
@@ -14,7 +14,7 @@ RED = (200, 50, 50)
 GRAY = (150, 150, 150)
 
 # Load background image
-BACKGROUND_IMAGE = pygame.image.load("background.jpg")
+BACKGROUND_IMAGE = pygame.image.load("background2.jpg")
 BACKGROUND_IMAGE = pygame.transform.smoothscale(BACKGROUND_IMAGE, (WIDTH, HEIGHT))
 
 # Create screen
@@ -98,10 +98,11 @@ class Hexagon:
         pygame.draw.polygon(screen, color, points, 2)
 
     def get_hex_points(self):
-        """Calculate the six corners of the hexagon."""
+        """Calculate the six corners of the hexagon with a 45-degree top-down effect."""
         points = []
         for i in range(6):
             angle = pygame.math.Vector2(HEX_SIZE, 0).rotate(60 * i)
+            angle.y *= 0.5  # Squash the Y-axis for the perspective effect
             points.append((self.x + angle.x, self.y + angle.y))
         return points
 
