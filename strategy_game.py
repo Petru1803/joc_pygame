@@ -6,7 +6,7 @@ pygame.init()
 
 # Constants
 WIDTH, HEIGHT = 1792, 1024
-HEX_SIZE = 25
+HEX_SIZE = int(25*1.5)
 BG_COLOR = (30, 30, 30)
 WHITE = (255, 255, 255)
 BLUE = (0, 100, 255)
@@ -149,21 +149,31 @@ quit_button = Button("Quit", WIDTH//2 - 100, HEIGHT//2 + 20, 200, 50, quit_game)
 # Create hexagons grid
 hexagons = []
 
-# Define the rectangular area to fully cover with hexagons
+# Green area positions extracted from the map
+hex_positions = [
+    (800, 1022), (42, 1022), (1567, 1022), (736, 1019), (395, 1020),
+    (1674, 1017), (1441, 1017), (601, 1020), (1235, 1013), (528, 1007),
+    (661, 1005), (324, 1002), (1513, 992), (114, 993), (443, 990),
+    (1773, 989), (267, 982), (1633, 977), (166, 960), (1726, 959),
+    (1559, 960), (727, 960), (57, 960), (846, 960), (557, 955),
+    (391, 951), (614, 948), (1475, 938), (670, 947), (255, 925),
+    (1016, 924), (1422, 914), (345, 912), (192, 909), (510, 908),
+    (897, 899), (571, 899), (445, 891), (761, 892), (1777, 880),
+    (637, 883), (296, 881), (1604, 878), (1276, 877), (995, 872),
+    (1662, 864), (701, 860), (42, 859), (371, 853), (867, 848),
+    (461, 836), (926, 830), (94, 829), (1032, 830), (806, 826),
+    (637, 827), (274, 826), (201, 827), (1772, 822), (1135, 821)
+]
 hex_width = HEX_SIZE * 2
-hex_height = int(HEX_SIZE * 1.732)  # Height of a hexagon in a staggered grid
-
-# Define the bounding box from the top-most and bottom-most hexagons
+hex_height = int(HEX_SIZE * 1.732)
 min_x, min_y = 100 + 3 * hex_width, 250
 max_x, max_y = 800 - 3 * hex_width, 750
 
-# Generate hexagons to fully cover the bounding box
-for y in range(min_y, max_y + hex_height, hex_height):
-    for x in range(min_x, max_x + hex_width, hex_width):
-        if (y // hex_height) % 2 == 1:
-            x += hex_width // 2  # Offset every other row
-        owner = "neutral"
-        hexagons.append(Hexagon(x, y, owner))
+for x, y in hex_positions:
+    if (y // hex_height) % 2 == 1:
+        x += hex_width // 2
+    owner = "neutral"
+    hexagons.append(Hexagon(x, y, owner))
 
 # Set exactly two hexagons to be blue (player-owned)
 if len(hexagons) > 2:
